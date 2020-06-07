@@ -1,4 +1,4 @@
-package com.rojer_ko.translator.data.retrofit
+package com.rojer_ko.translator.data.datasource.retrofit
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.rojer_ko.translator.Contract

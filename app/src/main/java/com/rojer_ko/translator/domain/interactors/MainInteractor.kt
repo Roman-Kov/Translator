@@ -1,4 +1,4 @@
-package com.rojer_ko.translator.domain
+package com.rojer_ko.translator.domain.interactors
 
 import com.rojer_ko.translator.Contract
 import com.rojer_ko.translator.data.model.DataModel

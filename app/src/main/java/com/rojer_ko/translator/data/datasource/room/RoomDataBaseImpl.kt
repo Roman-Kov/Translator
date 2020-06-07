@@ -1,4 +1,4 @@
-package com.rojer_ko.translator.data.room
+package com.rojer_ko.translator.data.datasource.room
 
 import com.rojer_ko.translator.Contract
 import com.rojer_ko.translator.data.model.SearchResult

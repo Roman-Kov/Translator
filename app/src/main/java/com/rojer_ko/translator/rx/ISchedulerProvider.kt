@@ -1,8 +1,7 @@
-package geekbrains.ru.translator.rx
+package com.rojer_ko.translator.rx
 
 import io.reactivex.Scheduler
 
-//In the sake of testing
 interface ISchedulerProvider {
 
     fun ui(): Scheduler

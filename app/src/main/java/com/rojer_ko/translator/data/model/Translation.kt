@@ -1,4 +1,7 @@
 package com.rojer_ko.translator.data.model
 
-class Translation {
-}
+import com.google.gson.annotations.SerializedName
+
+class Translation(
+    @field:SerializedName("text") val translation: String?
+)

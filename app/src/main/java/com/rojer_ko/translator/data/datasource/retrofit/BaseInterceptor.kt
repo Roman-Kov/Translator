@@ -1,4 +1,4 @@
-package com.rojer_ko.translator.data.retrofit
+package com.rojer_ko.translator.data.datasource.retrofit
 
 import okhttp3.Interceptor
 import okhttp3.Response

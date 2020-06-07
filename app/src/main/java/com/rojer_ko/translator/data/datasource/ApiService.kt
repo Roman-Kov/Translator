@@ -1,6 +1,6 @@
-package geekbrains.ru.translator.model.datasource
+package com.rojer_ko.translator.data.datasource
 
-import geekbrains.ru.translator.model.data.SearchResult
+import com.rojer_ko.translator.data.model.SearchResult
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
