@@ -2,30 +2,12 @@ package com.rojer_ko.translator.presentation.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.rojer_ko.translator.Contract
-import com.rojer_ko.translator.data.model.DataModel
+import com.rojer_ko.translator.data.model.AppState
+import com.rojer_ko.translator.domain.interactors.MainInteractor
+import com.rojer_ko.translator.presentation.main.MainViewModel
 
-abstract class BaseActivity<T: DataModel> : AppCompatActivity(), Contract.View {
+abstract class BaseActivity<T: AppState, V: MainInteractor> : AppCompatActivity() {
 
-    protected lateinit var presenter: Contract.Presenter<T, Contract.View>
-
-    protected abstract fun createPresenter(): Contract.Presenter<T, Contract.View>
-
-    abstract override fun renderData(dataModel: DataModel)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presenter = createPresenter()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.attachView(this)
-    }
-
-    override fun onStop(){
-        super.onStop()
-        presenter.detachView(this)
-    }
-
+    abstract val model: MainViewModel
+    abstract fun renderData(appState: AppState)
 }

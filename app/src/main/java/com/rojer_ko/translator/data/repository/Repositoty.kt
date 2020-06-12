@@ -1,4 +1,7 @@
 package com.rojer_ko.translator.data.repository
 
-interface Repositoty {
+import io.reactivex.Observable
+
+interface Repository<T>{
+    fun getData(word: String): Observable<T>
 }

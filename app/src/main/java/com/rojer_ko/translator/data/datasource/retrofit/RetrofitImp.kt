@@ -1,8 +1,8 @@
 package com.rojer_ko.translator.data.datasource.retrofit
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import com.rojer_ko.translator.Contract
 import com.rojer_ko.translator.data.datasource.ApiService
+import com.rojer_ko.translator.data.datasource.DataSource
 import com.rojer_ko.translator.data.model.SearchResult
 import io.reactivex.Observable
 import okhttp3.Interceptor
@@ -11,7 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitImp: Contract.DataSource<List<SearchResult>> {
+class RetrofitImp: DataSource<List<SearchResult>> {
     companion object {
         private const val BASE_URL_LOCATIONS = "https://dictionary.skyeng.ru/api/public/v1/"
     }
