@@ -7,7 +7,7 @@ import com.rojer_ko.translator.data.model.AppState
 import com.rojer_ko.translator.rx.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseViewModel<T: AppState>(
+abstract class BaseViewModel<T: AppState> (
     protected val liveDataForViewToObserve: MutableLiveData<T> = MutableLiveData(),
     protected val compositeDisposable: CompositeDisposable = CompositeDisposable(),
     protected val schedulerProvider: SchedulerProvider = SchedulerProvider()): ViewModel() {
