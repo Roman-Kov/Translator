@@ -2,20 +2,30 @@ package com.rojer_ko.translator.presentation.main
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.rojer_ko.translator.Contract
 import com.rojer_ko.translator.R
-import com.rojer_ko.translator.data.model.DataModel
+import com.rojer_ko.translator.data.model.AppState
 import com.rojer_ko.translator.data.model.SearchResult
+import com.rojer_ko.translator.domain.interactors.MainInteractor
 import com.rojer_ko.translator.presentation.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity: BaseActivity<DataModel>() {
+class MainActivity: BaseActivity<AppState, MainInteractor>() {
 
+    override val model: MainViewModel by viewModel()
+
+//    override val model: MainViewModel by lazy{
+//        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
+//    }
+
+    private val observer = Observer<AppState>{renderData(it)}
     private var adapter: MainAdapter? = null
     private val onItemClickListener: MainAdapter.OnListItemClickLestener =
+
         object : MainAdapter.OnListItemClickLestener{
             override fun onItemClick(data: SearchResult){
                 Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
@@ -26,44 +36,46 @@ class MainActivity: BaseActivity<DataModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        initViewModel()
+        searchBtnClick()
+    }
+
+    private fun initViewModel(){
+        check(historyRecyclerView.adapter == null){"The ViewModel should be initialised first" }
+        model.subscribe().observe(this@MainActivity, Observer<AppState> { renderData(it) })
+    }
+
+    private fun searchBtnClick(){
         searchBtn.setOnClickListener {
-            presenter.getData(searchText.text.toString(), true)
+            model.getData(searchText.text.toString(), true).observe(this@MainActivity, observer)
         }
     }
 
-    override fun createPresenter(): Contract.Presenter<DataModel, Contract.View> {
-        return MainPresenterImpl()
-    }
-
-    override fun renderData(dataModel: DataModel) {
-        when (dataModel){
-            is DataModel.Success -> {
-                if(dataModel.data == null || dataModel.data.isEmpty()){
+    override fun renderData(appState: AppState) {
+        when (appState){
+            is AppState.Success -> {
+                if(appState.data == null || appState.data.isEmpty()){
                     Log.d("Error", "null or empty")
                 }
                 else{
                     if(adapter == null){
-                        adapter =  MainAdapter(onItemClickListener, dataModel.data)
+                        adapter =  MainAdapter(onItemClickListener, appState.data)
                         historyRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
                         historyRecyclerView.adapter = adapter
-                        Toast.makeText(this@MainActivity, "Null", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        adapter!!.setData(dataModel.data)
-                        Toast.makeText(this@MainActivity, "NotNull", Toast.LENGTH_SHORT).show()
+                        adapter!!.setData(appState.data)
                     }
                 }
 
             }
 
-            is DataModel.Error -> {
+            is AppState.Error -> {
                 Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
             }
 
-            is DataModel.Loading -> {
-
+            is AppState.Loading -> {
             }
         }
-
     }
 }
