@@ -1,19 +1,20 @@
 package com.rojer_ko.translator.domain.interactors
 
-import com.rojer_ko.translator.Contract
-import com.rojer_ko.translator.data.model.DataModel
+import com.rojer_ko.translator.data.model.AppState
 import com.rojer_ko.translator.data.model.SearchResult
-import io.reactivex.Observable
+import com.rojer_ko.translator.data.repository.Repository
 
-class MainInteractor(
-    private val remoteRepository: Contract.Repository<List<SearchResult>>,
-    private val localRepository: Contract.Repository<List<SearchResult>>):
-    Contract.Interactor<DataModel>{
-    override fun getData(word: String, fromRemoteSource: Boolean): Observable<DataModel> {
-        return if(fromRemoteSource){
-            remoteRepository.getData(word).map { DataModel.Success(it)}
+class MainInteractor (
+    private val repositoryRemote: Repository<List<SearchResult>>,
+    private val repositoryLocal: Repository<List<SearchResult>>
+) : Interactor<AppState>{
+
+    override suspend fun getData(word: String, fromRemoteSource: Boolean): AppState {
+        return AppState.Success(
+            if(fromRemoteSource){
+            repositoryRemote.getData(word)
         } else{
-            localRepository.getData(word).map { DataModel.Success(it)}
-        }
+            repositoryLocal.getData(word)
+        })
     }
 }
