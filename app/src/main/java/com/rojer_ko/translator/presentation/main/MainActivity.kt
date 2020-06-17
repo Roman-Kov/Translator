@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rojer_ko.translator.R
 import com.rojer_ko.translator.data.model.AppState
@@ -18,11 +17,6 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
 
     override val model: MainViewModel by viewModel()
 
-//    override val model: MainViewModel by lazy{
-//        ViewModelProvider.NewInstanceFactory().create(MainViewModel::class.java)
-//    }
-
-    private val observer = Observer<AppState>{renderData(it)}
     private var adapter: MainAdapter? = null
     private val onItemClickListener: MainAdapter.OnListItemClickLestener =
 
@@ -47,7 +41,7 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
 
     private fun searchBtnClick(){
         searchBtn.setOnClickListener {
-            model.getData(searchText.text.toString(), true).observe(this@MainActivity, observer)
+            model.getData(searchText.text.toString(), true)
         }
     }
 

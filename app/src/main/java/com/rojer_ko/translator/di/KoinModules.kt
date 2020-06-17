@@ -12,12 +12,8 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val application = module {
-    single<Repository<List<SearchResult>>>(named(NAME_REMOTE)){
-        RepositoryImpl(RetrofitImpl())
-    }
-
-    single<Repository<List<SearchResult>>>(named(NAME_LOCAL)) {
-        RepositoryImpl(RoomDataBaseImpl())
+    single<Repository<List<SearchResult>>>(named(NAME_REMOTE)){RepositoryImpl(RetrofitImpl())}
+    single<Repository<List<SearchResult>>>(named(NAME_LOCAL)) {RepositoryImpl(RoomDataBaseImpl())
     }
 }
 

@@ -5,7 +5,7 @@ import com.rojer_ko.translator.data.model.SearchResult
 import io.reactivex.Observable
 
 class RoomDataBaseImpl: DataSource<List<SearchResult>> {
-    override fun getData(word: String): Observable<List<SearchResult>> {
+    override suspend fun getData(word: String): List<SearchResult> {
         TODO("Not yet implemented")
     }
 }

@@ -1,10 +1,9 @@
 package com.rojer_ko.translator.data.datasource.retrofit
 
-import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.rojer_ko.translator.data.datasource.ApiService
 import com.rojer_ko.translator.data.datasource.DataSource
 import com.rojer_ko.translator.data.model.SearchResult
-import io.reactivex.Observable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -16,9 +15,8 @@ class RetrofitImpl: DataSource<List<SearchResult>> {
         private const val BASE_URL_LOCATIONS = "https://dictionary.skyeng.ru/api/public/v1/"
     }
 
-    override fun getData(word: String): Observable<List<SearchResult>> {
-        return getService(BaseInterceptor.interceptor).search(word)
-    }
+    override suspend fun getData(word: String): List<SearchResult> =
+        getService(BaseInterceptor.interceptor).searchAsync(word).await()
 
     private fun getService(interceptor: Interceptor): ApiService {
         return createRetrofit(interceptor).create(ApiService::class.java)
@@ -28,7 +26,7 @@ class RetrofitImpl: DataSource<List<SearchResult>> {
         return Retrofit.Builder()
             .baseUrl(BASE_URL_LOCATIONS)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(createOkHttpClient(interceptor))
             .build()
     }
@@ -39,5 +37,4 @@ class RetrofitImpl: DataSource<List<SearchResult>> {
         httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         return httpClient.build()
     }
-
 }
