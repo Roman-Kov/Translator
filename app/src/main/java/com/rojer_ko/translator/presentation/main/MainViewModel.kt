@@ -1,16 +1,12 @@
 package com.rojer_ko.translator.presentation.main
 
 import androidx.lifecycle.LiveData
-import com.rojer_ko.translator.data.datasource.DataSourceLocal
-import com.rojer_ko.translator.data.datasource.DataSourceRemote
 import com.rojer_ko.translator.data.model.AppState
-import com.rojer_ko.translator.data.repository.RepositoryImpl
 import com.rojer_ko.translator.domain.interactors.MainInteractor
 import com.rojer_ko.translator.presentation.base.BaseViewModel
 import io.reactivex.observers.DisposableObserver
-import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val interactor: MainInteractor) :
+class MainViewModel(private val interactor: MainInteractor) :
     BaseViewModel<AppState>() {
     private var appState: AppState? = null
 
