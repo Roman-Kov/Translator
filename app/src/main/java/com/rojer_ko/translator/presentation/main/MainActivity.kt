@@ -42,7 +42,7 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
     }
 
     private fun initViewModel(){
-        check(historyRecyclerView.adapter == null){"The ViewModel should be initialised first" }
+        check(mainRecyclerView.adapter == null){"The ViewModel should be initialised first" }
         model.subscribe().observe(this@MainActivity, Observer<AppState> { renderData(it) })
     }
 
@@ -61,8 +61,8 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
                 else{
                     if(adapter == null){
                         adapter =  MainAdapter(onItemClickListener, appState.data)
-                        historyRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                        historyRecyclerView.adapter = adapter
+                        mainRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                        mainRecyclerView.adapter = adapter
                     }
                     else{
                         adapter!!.setData(appState.data)
