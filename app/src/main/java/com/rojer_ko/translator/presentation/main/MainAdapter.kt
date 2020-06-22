@@ -10,7 +10,8 @@ import com.rojer_ko.translator.R
 import com.rojer_ko.translator.data.model.SearchResult
 import kotlinx.android.extensions.LayoutContainer
 
-class MainAdapter(private val onItemClickListener: OnListItemClickLestener, private var items: List<SearchResult>): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
+class MainAdapter(private val onItemClickListener: OnListItemClickLestener,
+                  private var items: List<SearchResult>): RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val v: View =

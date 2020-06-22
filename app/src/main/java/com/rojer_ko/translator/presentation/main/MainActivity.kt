@@ -10,6 +10,7 @@ import com.rojer_ko.translator.data.model.AppState
 import com.rojer_ko.translator.data.model.SearchResult
 import com.rojer_ko.translator.domain.interactors.MainInteractor
 import com.rojer_ko.translator.presentation.base.BaseActivity
+import com.rojer_ko.translator.presentation.description.DescriptionActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -22,7 +23,13 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
 
         object : MainAdapter.OnListItemClickLestener{
             override fun onItemClick(data: SearchResult){
-                Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
+                startActivity(DescriptionActivity.getIntent(
+                    applicationContext,
+                    data.text!!,
+                    data.meanings!![0].translation!!.translation!!,
+                    data.meanings[0].imageUrl
+                ))
+                //Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
         }
 
