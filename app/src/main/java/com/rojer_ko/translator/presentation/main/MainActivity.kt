@@ -1,8 +1,9 @@
 package com.rojer_ko.translator.presentation.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rojer_ko.translator.R
@@ -11,6 +12,7 @@ import com.rojer_ko.translator.data.model.SearchResult
 import com.rojer_ko.translator.domain.interactors.MainInteractor
 import com.rojer_ko.translator.presentation.base.BaseActivity
 import com.rojer_ko.translator.presentation.description.DescriptionActivity
+import com.rojer_ko.translator.presentation.history.HistoryActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -29,7 +31,6 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
                     data.meanings!![0].translation!!.translation!!,
                     data.meanings[0].imageUrl
                 ))
-                //Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -52,31 +53,29 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
         }
     }
 
-    override fun renderData(appState: AppState) {
-        when (appState){
-            is AppState.Success -> {
-                if(appState.data == null || appState.data.isEmpty()){
-                    Log.d("Error", "null or empty")
-                }
-                else{
-                    if(adapter == null){
-                        adapter =  MainAdapter(onItemClickListener, appState.data)
-                        mainRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
-                        mainRecyclerView.adapter = adapter
-                    }
-                    else{
-                        adapter!!.setData(appState.data)
-                    }
-                }
+    override fun setDataToAdapter(data: List<SearchResult>) {
+        if (adapter == null) {
+            adapter = MainAdapter(onItemClickListener, data)
+            mainRecyclerView.layoutManager = LinearLayoutManager(applicationContext)
+            mainRecyclerView.adapter = adapter
+        } else {
+            adapter!!.setData(data)
+        }
+    }
 
-            }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
-            is AppState.Error -> {
-                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_history -> {
+                startActivity(Intent(this, HistoryActivity::class.java))
+                true
             }
-
-            is AppState.Loading -> {
-            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.rojer_ko.translator.data.datasource.room
 
-import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.RoomDatabase
 
