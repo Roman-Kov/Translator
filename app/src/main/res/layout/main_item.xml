@@ -9,19 +9,19 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto">
         <TextView
-            android:id="@+id/historyTranslationTextView"
+            android:id="@+id/translationTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
-            android:id="@+id/historyMeaningTextView"
+            android:id="@+id/meaningTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/meanings_text_size"
             android:textColor="#787878"
-            app:layout_constraintTop_toBottomOf="@id/historyTranslationTextView"
+            app:layout_constraintTop_toBottomOf="@id/translationTextView"
             app:layout_constraintStart_toStartOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

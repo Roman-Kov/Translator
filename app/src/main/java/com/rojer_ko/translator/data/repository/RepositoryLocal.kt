@@ -1,7 +1,7 @@
-package com.rojer_ko.translator.data.datasource
+package com.rojer_ko.translator.data.repository
 
 import com.rojer_ko.translator.data.model.AppState
 
-interface DataSourceLocal<T> : DataSource<T> {
+interface RepositoryLocal<T>: Repository<T> {
     suspend fun saveToDB(appState: AppState)
 }
