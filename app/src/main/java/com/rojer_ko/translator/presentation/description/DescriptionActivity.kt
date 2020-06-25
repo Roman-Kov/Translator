@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
 import com.rojer_ko.translator.R
-import com.rojer_ko.translator.utils.isOnline
+import com.rojer_ko.utils.isOnline
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_description.*

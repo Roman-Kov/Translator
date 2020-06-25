@@ -1,4 +1,4 @@
-package com.rojer_ko.translator.utils
+package com.rojer_ko.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
