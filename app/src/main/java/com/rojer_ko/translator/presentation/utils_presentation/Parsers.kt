@@ -1,4 +1,4 @@
-package com.rojer_ko.translator.utils
+package com.rojer_ko.utils
 
 import com.rojer_ko.translator.data.datasource.room.HistoryEntity
 import com.rojer_ko.translator.data.model.AppState
