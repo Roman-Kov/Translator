@@ -1,4 +1,4 @@
-package com.rojer_ko.translator.presentation.history
+package com.rojer_ko.historyscreen
 
 import androidx.lifecycle.LiveData
 import com.rojer_ko.translator.data.model.AppState

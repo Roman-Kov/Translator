@@ -1,10 +1,9 @@
-package com.rojer_ko.translator.presentation.history
+package com.rojer_ko.historyscreen
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rojer_ko.translator.R
 import com.rojer_ko.translator.data.model.SearchResult
 import kotlinx.android.synthetic.main.history_item.view.*
 

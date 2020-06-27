@@ -26,6 +26,7 @@ object Modules {
 object Versions {
    // Tools
    const val multidex = "1.0.3"
+   const val play = "1.7.3"
 
    // Design
    const val appcompat = "1.1.0"
@@ -74,6 +75,7 @@ object Versions {
 
 object Tools {
    const val multidex = "com.android.support:multidex:${Versions.multidex}"
+   const val play = "com.google.android.play:core:${Versions.play}"
 }
 
 object Design {

@@ -1,18 +1,21 @@
-package com.rojer_ko.translator.presentation.history
+package com.rojer_ko.historyscreen
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.rojer_ko.translator.R
 import com.rojer_ko.translator.data.model.AppState
 import com.rojer_ko.translator.data.model.SearchResult
 import com.rojer_ko.translator.domain.interactors.HistoryInteractor
 import com.rojer_ko.translator.presentation.base.BaseActivity
-import kotlinx.android.synthetic.main.activity_history.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_history.*
 
 class HistoryActivity :  BaseActivity<AppState, HistoryInteractor>() {
+
+    init {
+        injectDependencies()
+    }
 
     override val model: HistoryViewModel by viewModel()
     private var adapter: HistoryAdapter? = null

@@ -9,12 +9,17 @@ import com.rojer_ko.translator.data.repository.Repository
 import com.rojer_ko.translator.data.repository.RepositoryImpl
 import com.rojer_ko.translator.data.repository.RepositoryImplLocal
 import com.rojer_ko.translator.data.repository.RepositoryLocal
-import com.rojer_ko.translator.domain.interactors.HistoryInteractor
 import com.rojer_ko.translator.domain.interactors.MainInteractor
-import com.rojer_ko.translator.presentation.history.HistoryViewModel
 import com.rojer_ko.translator.presentation.main.MainViewModel
 import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
+
+fun injectDependencies() = loadModules
+
+private val loadModules by lazy {
+    loadKoinModules(listOf(application, mainScreen))
+}
 
 val application = module {
     single {Room.databaseBuilder(get(), HistoryDataBase::class.java, "HistoryDB").build()}
@@ -28,9 +33,4 @@ val application = module {
 val mainScreen = module {
     factory {MainInteractor(get(), get())}
     viewModel {MainViewModel(get())}
-}
-
-val historyScreen = module {
-    factory {HistoryInteractor(get(), get())}
-    viewModel {HistoryViewModel(get()) }
 }
