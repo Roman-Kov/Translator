@@ -10,9 +10,11 @@ import com.rojer_ko.translator.data.repository.RepositoryImpl
 import com.rojer_ko.translator.data.repository.RepositoryImplLocal
 import com.rojer_ko.translator.data.repository.RepositoryLocal
 import com.rojer_ko.translator.domain.interactors.MainInteractor
+import com.rojer_ko.translator.presentation.main.MainActivity
 import com.rojer_ko.translator.presentation.main.MainViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 fun injectDependencies() = loadModules
@@ -31,6 +33,9 @@ val application = module {
 }
 
 val mainScreen = module {
-    factory {MainInteractor(get(), get())}
-    viewModel {MainViewModel(get())}
+    scope(named<MainActivity>()){
+        scoped {MainInteractor(get(), get())}
+        viewModel {MainViewModel(get())}
+    }
+
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +26,9 @@ import com.rojer_ko.translator.di.injectDependencies
 import com.rojer_ko.translator.domain.interactors.MainInteractor
 import com.rojer_ko.translator.presentation.base.BaseActivity
 import com.rojer_ko.translator.presentation.description.DescriptionActivity
+import com.rojer_ko.utils.viewById
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.scope.currentScope
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity: BaseActivity<AppState, MainInteractor>() {
@@ -39,8 +42,9 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
         injectDependencies()
     }
 
-    override val model: MainViewModel by viewModel()
+    override val model: MainViewModel by currentScope.inject()
 
+    private val mainActivitySearchBtn by viewById<Button>(R.id.searchBtn)
     private lateinit var splitInstallManager: SplitInstallManager
     private lateinit var appUpdateManager: AppUpdateManager
     private val stateUpdatedListener: InstallStateUpdatedListener =
@@ -57,12 +61,15 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
 
         object : MainAdapter.OnListItemClickLestener{
             override fun onItemClick(data: SearchResult){
-                startActivity(DescriptionActivity.getIntent(
-                    applicationContext,
-                    data.text!!,
-                    data.meanings!![0].translation!!.translation!!,
-                    data.meanings[0].imageUrl
-                ))
+                if (isNetworkAvailable){
+                    startActivity(DescriptionActivity.getIntent(
+                        applicationContext,
+                        data.text!!,
+                        data.meanings!![0].translation!!.translation!!,
+                        data.meanings[0].imageUrl
+                    ))
+                }
+                else {Toast.makeText(this@MainActivity, R.string.dialog_message_device_is_offline, Toast.LENGTH_LONG).show()}
             }
         }
 
@@ -72,6 +79,7 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
 
         initViewModel()
         searchBtnClick()
+        checkForUpdates()
     }
 
     private fun initViewModel(){
@@ -80,8 +88,8 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
     }
 
     private fun searchBtnClick(){
-        searchBtn.setOnClickListener {
-            model.getData(searchText.text.toString(), true)
+        mainActivitySearchBtn.setOnClickListener {
+            model.getData(searchText.text.toString(), isNetworkAvailable)
         }
     }
 

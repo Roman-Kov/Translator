@@ -10,6 +10,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_history.*
+import org.koin.android.scope.currentScope
 
 class HistoryActivity :  BaseActivity<AppState, HistoryInteractor>() {
 
@@ -17,7 +18,7 @@ class HistoryActivity :  BaseActivity<AppState, HistoryInteractor>() {
         injectDependencies()
     }
 
-    override val model: HistoryViewModel by viewModel()
+    override val model: HistoryViewModel by currentScope.inject()
     private var adapter: HistoryAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
