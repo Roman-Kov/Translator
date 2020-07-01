@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Translator</string>
     <string name="search_btn_text">SEARCH</string>
+    <string name="main_menu_action_history">History</string>
+    <string name="title_historyscreen">History</string>
+    <string name="dialog_message_device_is_offline">Offline</string>
 </resources>

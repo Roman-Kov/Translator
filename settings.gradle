@@ -1,2 +1,4 @@
+include ':historyScreen'
+include ':utils'
 include ':app'
 rootProject.name='Translator'
