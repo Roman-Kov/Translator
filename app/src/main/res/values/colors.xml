@@ -3,4 +3,17 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="myLightThemeColorPrimary">#5997ac</color>
+    <color name="myLightThemeColorDark">#467b8c</color>
+    <color name="myLightThemeColorAccent">#e26575</color>
+    <color name="myLightThemeTextColor">#0d1110</color>
+
+    <color name="myDarkThemeColorPrimary">#243e47</color>
+    <color name="myDarkThemeColorDark">#5997ac</color>
+    <color name="myDarkThemeColorAccent">#e26575</color>
+    <color name="myDarkThemeBackgroundColor">#48798a</color>
+    <color name="myDarkThemeTextColor">#fcfcf7</color>
+    <color name="myDarkThemeEditTextColor">#1f3a3d</color>
+
 </resources>

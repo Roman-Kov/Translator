@@ -42,8 +42,10 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
         injectDependencies()
     }
 
+    override val layoutRes: Int = R.layout.activity_main
+    override val appBar: Int? = R.id.mainToolbar
+    override val networkStatusImage: Int? = R.id.checkConnectionImage
     override val model: MainViewModel by currentScope.inject()
-
     private val mainActivitySearchBtn by viewById<Button>(R.id.searchBtn)
     private lateinit var splitInstallManager: SplitInstallManager
     private lateinit var appUpdateManager: AppUpdateManager
@@ -58,7 +60,6 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
 
     private var adapter: MainAdapter? = null
     private val onItemClickListener: MainAdapter.OnListItemClickLestener =
-
         object : MainAdapter.OnListItemClickLestener{
             override fun onItemClick(data: SearchResult){
                 if (isNetworkAvailable){
@@ -75,7 +76,6 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         initViewModel()
         searchBtnClick()
@@ -155,7 +155,6 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
         }
     }
 
-
     private fun loadHistoryFeature(){
         splitInstallManager = SplitInstallManagerFactory.create(applicationContext)
 
@@ -198,6 +197,7 @@ class MainActivity: BaseActivity<AppState, MainInteractor>() {
             }
         }
     }
+
     private fun popupSnackbarForCompleteUpdate() {
         Snackbar.make(parent.activity_main_layout,
             "An update has just been downloaded.",

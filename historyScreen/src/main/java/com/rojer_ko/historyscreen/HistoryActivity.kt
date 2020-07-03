@@ -6,7 +6,6 @@ import com.rojer_ko.translator.data.model.AppState
 import com.rojer_ko.translator.data.model.SearchResult
 import com.rojer_ko.translator.domain.interactors.HistoryInteractor
 import com.rojer_ko.translator.presentation.base.BaseActivity
-import org.koin.android.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_history.*
@@ -18,12 +17,14 @@ class HistoryActivity :  BaseActivity<AppState, HistoryInteractor>() {
         injectDependencies()
     }
 
+    override val layoutRes: Int =  R.layout.activity_history
+    override val appBar: Int? = null
+    override val networkStatusImage: Int? = null
     override val model: HistoryViewModel by currentScope.inject()
     private var adapter: HistoryAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_history)
 
         setActionbarHomeButtonAsUp()
         initViewModel()

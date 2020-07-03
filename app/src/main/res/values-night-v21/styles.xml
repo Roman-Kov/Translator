@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.MyTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="colorPrimary">@color/myDarkThemeColorPrimary</item>
+        <item name="colorPrimaryDark">@color/myDarkThemeColorDark</item>
+        <item name="colorAccent">@color/myDarkThemeColorAccent</item>
+        <item name="android:windowBackground">@color/myDarkThemeBackgroundColor</item>
+        <item name="android:textColorPrimary">@color/myDarkThemeTextColor</item>
+        <item name="android:textColorSecondary">@color/myDarkThemeTextColor</item>
+        <item name="android:textColor">@color/myDarkThemeTextColor</item>
+        <item name="android:editTextColor">@color/myDarkThemeEditTextColor</item>
+        <item name="floatingActionButtonStyle">parent</item>
+        <item name="popupMenuBackground">@color/myDarkThemeColorDark</item>
+        <item name="android:statusBarColor">@color/myDarkThemeColorPrimary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBarMyTheme" parent="AppTheme.MyTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>
